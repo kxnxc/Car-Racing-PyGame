@@ -77,3 +77,10 @@ while running:
 
     pygame.draw.rect(screen, Colors.YELLOW, left_edge_marker)
     pygame.draw.rect(screen, Colors.YELLOW, right_edge_marker)
+
+    lane_marker_move_y += speed * 2
+    if lane_marker_move_y >= MapEdges.MARKER_HEIGHT * 2:
+        lane_marker_move_y = 0
+    for y in range(MapEdges.MARKER_HEIGHT * -2, MapEdges.WINDOW_HEIGHT, MapEdges.MARKER_HEIGHT * 2):
+        pygame.draw.rect(screen, Colors.WHITE, (Coordinates.LEFT_LANE + 45, y + lane_marker_move_y, MapEdges.MARKER_WIDTH, MapEdges.MARKER_HEIGHT))
+        pygame.draw.rect(screen, Colors.WHITE, (Coordinates.CENTER_LANE + 45, y + lane_marker_move_y, MapEdges.MARKER_WIDTH, MapEdges.MARKER_HEIGHT))
