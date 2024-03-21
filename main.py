@@ -70,3 +70,5 @@ while running:
                     elif event.key == K_RIGHT:
                         player.rect.right = vehicle.rect.left
                         crash_rect.center = [player.rect.right, (player.rect.center[1] + vehicle.rect.center[1]) / 2]
+
+    screen.fill(Colors.GREEN)
