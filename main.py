@@ -86,3 +86,17 @@ while running:
         pygame.draw.rect(screen, Colors.WHITE, (Coordinates.CENTER_LANE + 45, y + lane_marker_move_y, MapEdges.MARKER_WIDTH, MapEdges.MARKER_HEIGHT))
 
     player_group.draw(screen)
+
+    if len(vehicle_group) < 2:
+
+        add_vehicle = True
+        for vehicle in vehicle_group:
+            if vehicle.rect.top < vehicle.rect.height * 1.5:
+                add_vehicle = False
+
+        if add_vehicle:
+            lane = random.choice(Coordinates.LANES)
+
+            image = random.choice(vehicle_images)
+            vehicle = Vehicle(image, lane, MapEdges.WINDOW_HEIGHT / -2)
+            vehicle_group.add(vehicle)
