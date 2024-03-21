@@ -1,8 +1,6 @@
-from random import random
-
+import random
 import pygame
 from pygame import QUIT, KEYDOWN, K_LEFT, K_RIGHT, K_y, K_n
-
 from constants.Colors import Colors
 from constants.MapEdges import MapEdges
 from model.PlayerVehicle import PlayerVehicle
