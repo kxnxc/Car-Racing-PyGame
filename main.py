@@ -100,3 +100,62 @@ while running:
             image = random.choice(vehicle_images)
             vehicle = Vehicle(image, lane, MapEdges.WINDOW_HEIGHT / -2)
             vehicle_group.add(vehicle)
+
+    for vehicle in vehicle_group:
+        vehicle.rect.y += speed
+
+        if vehicle.rect.top >= MapEdges.WINDOW_HEIGHT:
+            vehicle.kill()
+
+            score += 1
+
+            if score > 0 and score % 5 == 0:
+                speed += 1
+
+    vehicle_group.draw(screen)
+
+    font = pygame.font.Font(pygame.font.get_default_font(), 16)
+    text = font.render('Score: ' + str(score), True, Colors.WHITE)
+    text_rect = text.get_rect()
+    text_rect.center = (50, 400)
+    screen.blit(text, text_rect)
+
+    if pygame.sprite.spritecollide(player, vehicle_group, True):
+        gameover = True
+        crash_rect.center = [player.rect.center[0], player.rect.top]
+
+    if gameover:
+        screen.blit(crash, crash_rect)
+
+        pygame.draw.rect(screen, Colors.RED, (0, 50, MapEdges.WINDOW_WIDTH, 100))
+
+        font = pygame.font.Font(pygame.font.get_default_font(), 16)
+        text = font.render('Game over. Play again? (Enter Y or N)', True, Colors.WHITE)
+        text_rect = text.get_rect()
+        text_rect.center = (MapEdges.WINDOW_WIDTH / 2, 100)
+        screen.blit(text, text_rect)
+
+    pygame.display.update()
+
+    while gameover:
+
+        clock.tick(fps)
+
+        for event in pygame.event.get():
+
+            if event.type == QUIT:
+                gameover = False
+                running = False
+
+            if event.type == KEYDOWN:
+                if event.key == K_y:
+                    gameover = False
+                    speed = 2
+                    score = 0
+                    vehicle_group.empty()
+                    player.rect.center = [Coordinates.PLAYER_X, Coordinates.PLAYER_Y]
+                elif event.key == K_n:
+                    gameover = False
+                    running = False
+
+pygame.quit()
