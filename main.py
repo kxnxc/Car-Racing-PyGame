@@ -58,3 +58,8 @@ while running:
                 player.rect.x -= 100
             elif event.key == K_RIGHT and player.rect.center[0] < Coordinates.RIGHT_LANE:
                 player.rect.x += 100
+
+            for vehicle in vehicle_group:
+                if pygame.sprite.collide_rect(player, vehicle):
+
+                    gameover = True
