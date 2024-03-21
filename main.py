@@ -72,3 +72,5 @@ while running:
                         crash_rect.center = [player.rect.right, (player.rect.center[1] + vehicle.rect.center[1]) / 2]
 
     screen.fill(Colors.GREEN)
+
+    pygame.draw.rect(screen, Colors.GRAY, road)
