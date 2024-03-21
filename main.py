@@ -22,4 +22,7 @@ gameover = False
 speed = 2
 score = 0
 
+player_group = pygame.sprite.Group()
+vehicle_group = pygame.sprite.Group()
+
 
