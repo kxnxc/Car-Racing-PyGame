@@ -74,3 +74,6 @@ while running:
     screen.fill(Colors.GREEN)
 
     pygame.draw.rect(screen, Colors.GRAY, road)
+
+    pygame.draw.rect(screen, Colors.YELLOW, left_edge_marker)
+    pygame.draw.rect(screen, Colors.YELLOW, right_edge_marker)
