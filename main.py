@@ -51,3 +51,10 @@ while running:
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
+
+        if event.type == KEYDOWN:
+
+            if event.key == K_LEFT and player.rect.center[0] > Coordinates.LEFT_LANE:
+                player.rect.x -= 100
+            elif event.key == K_RIGHT and player.rect.center[0] < Coordinates.RIGHT_LANE:
+                player.rect.x += 100
