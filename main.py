@@ -1,8 +1,13 @@
+from random import random
+
 import pygame
+from pygame import QUIT, KEYDOWN, K_LEFT, K_RIGHT, K_y, K_n
+
+from constants.Colors import Colors
 from constants.MapEdges import MapEdges
 from model.PlayerVehicle import PlayerVehicle
 from constants.Coordinates import Coordinates
-
+from model.Vehicle import Vehicle
 
 pygame.init()
 
@@ -37,3 +42,12 @@ for image_filename in image_filenames:
 
 crash = pygame.image.load('images/crash.png')
 crash_rect = crash.get_rect()
+
+running = True
+while running:
+
+    clock.tick(fps)
+
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            running = False
