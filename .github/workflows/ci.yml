@@ -1,0 +1,35 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest flake8 pytest-html flake8-html pygame
+
+    - name: Run tests
+      run: pytest --html=pytest_report.html
+
+    - name: Run Flake8
+      run: flake8 . --format=html --htmldir=flake8_report
+
+    - name: Commit and push reports
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add pytest_report.html flake8_report/
+        git commit -m "Add test and lint reports"
+        git push
