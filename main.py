@@ -31,7 +31,8 @@ vehicle_group = pygame.sprite.Group()
 player = PlayerVehicle(Coordinates.PLAYER_X, Coordinates.PLAYER_Y)
 player_group.add(player)
 
-image_filenames = ['pickup_truck.png', 'semi_trailer.png', 'taxi.png', 'van.png']
+image_filenames = ['pickup_truck.png',
+                   'semi_trailer.png', 'taxi.png', 'van.png']
 vehicle_images = []
 
 for image_filename in image_filenames:
@@ -52,9 +53,11 @@ while running:
 
         if event.type == KEYDOWN:
 
-            if event.key == K_LEFT and player.rect.center[0] > Coordinates.LEFT_LANE:
+            if event.key == K_LEFT and player.rect.center[0] \
+                    > Coordinates.LEFT_LANE:
                 player.rect.x -= 100
-            elif event.key == K_RIGHT and player.rect.center[0] < Coordinates.RIGHT_LANE:
+            elif event.key == K_RIGHT and player.rect.center[0] \
+                    < Coordinates.RIGHT_LANE:
                 player.rect.x += 100
 
             for vehicle in vehicle_group:
@@ -64,10 +67,14 @@ while running:
 
                     if event.key == K_LEFT:
                         player.rect.left = vehicle.rect.right
-                        crash_rect.center = [player.rect.left, (player.rect.center[1] + vehicle.rect.center[1]) / 2]
+                        crash_rect.center = [player.rect.left,
+                                             (player.rect.center[1]
+                                              + vehicle.rect.center[1]) / 2]
                     elif event.key == K_RIGHT:
                         player.rect.right = vehicle.rect.left
-                        crash_rect.center = [player.rect.right, (player.rect.center[1] + vehicle.rect.center[1]) / 2]
+                        crash_rect.center = [player.rect.right,
+                                             (player.rect.center[1]
+                                              + vehicle.rect.center[1]) / 2]
 
     screen.fill(Colors.GREEN)
 
@@ -79,9 +86,14 @@ while running:
     lane_marker_move_y += speed * 2
     if lane_marker_move_y >= MapEdges.MARKER_HEIGHT * 2:
         lane_marker_move_y = 0
-    for y in range(MapEdges.MARKER_HEIGHT * -2, MapEdges.WINDOW_HEIGHT, MapEdges.MARKER_HEIGHT * 2):
-        pygame.draw.rect(screen, Colors.WHITE, (Coordinates.LEFT_LANE + 45, y + lane_marker_move_y, MapEdges.MARKER_WIDTH, MapEdges.MARKER_HEIGHT))
-        pygame.draw.rect(screen, Colors.WHITE, (Coordinates.CENTER_LANE + 45, y + lane_marker_move_y, MapEdges.MARKER_WIDTH, MapEdges.MARKER_HEIGHT))
+    for y in range(MapEdges.MARKER_HEIGHT * -2,
+                   MapEdges.WINDOW_HEIGHT, MapEdges.MARKER_HEIGHT * 2):
+        pygame.draw.rect(screen, Colors.WHITE,
+                         (Coordinates.LEFT_LANE + 45, y + lane_marker_move_y,
+                          MapEdges.MARKER_WIDTH, MapEdges.MARKER_HEIGHT))
+        pygame.draw.rect(screen, Colors.WHITE,
+                         (Coordinates.CENTER_LANE + 45, y + lane_marker_move_y,
+                          MapEdges.MARKER_WIDTH, MapEdges.MARKER_HEIGHT))
 
     player_group.draw(screen)
 
@@ -125,10 +137,12 @@ while running:
     if gameover:
         screen.blit(crash, crash_rect)
 
-        pygame.draw.rect(screen, Colors.RED, (0, 50, MapEdges.WINDOW_WIDTH, 100))
+        pygame.draw.rect(screen, Colors.RED,
+                         (0, 50, MapEdges.WINDOW_WIDTH, 100))
 
         font = pygame.font.Font(pygame.font.get_default_font(), 16)
-        text = font.render('Game over. Play again? (Enter Y or N)', True, Colors.WHITE)
+        text = font.render('Game over. Play again? (Enter Y or N)',
+                           True, Colors.WHITE)
         text_rect = text.get_rect()
         text_rect.center = (MapEdges.WINDOW_WIDTH / 2, 100)
         screen.blit(text, text_rect)
@@ -151,7 +165,8 @@ while running:
                     speed = 2
                     score = 0
                     vehicle_group.empty()
-                    player.rect.center = [Coordinates.PLAYER_X, Coordinates.PLAYER_Y]
+                    player.rect.center = [Coordinates.PLAYER_X,
+                                          Coordinates.PLAYER_Y]
                 elif event.key == K_n:
                     gameover = False
                     running = False
