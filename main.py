@@ -43,6 +43,7 @@ crash = pygame.image.load('images/crash.png')
 crash_rect = crash.get_rect()
 
 running = True
+
 while running:
 
     clock.tick(fps)
